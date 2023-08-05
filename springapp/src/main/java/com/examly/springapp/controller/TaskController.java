@@ -1,47 +1,45 @@
-
 package com.examly.springapp.controller;
-
-import com.examly.springapp.entity.Taskentity;
-import com.examly.springapp.service.TaskService;
 import java.util.List;
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.examly.springapp.model.Task;
+import com.examly.springapp.service.TaskService;
+
 @RestController
-@RequestMapping()
-public class TaskController {
+public class TaskController{
     @Autowired
-    private TaskService service;
-    
+    private TaskService taskService;
+
     @PostMapping("/saveTask")
-    public Taskentity saveTask(@RequestBody Taskentity taskentity){
-        Taskentity output = service.saveTask(taskentity);
-        return output;
+    public Task saveTask(@RequestBody Task task){
+        return taskService.saveTask(task);
     }
 
-
     @GetMapping("/changeStatus")
-    private Taskentity updatetaskStatus(@RequestParam("id") String id){
-        return service.updatetaskStatus(id);
+    public Task changeStatus(@RequestParam Long id,@RequestParam String newStatus){
+        return taskService.changeStatus(id,newStatus);
     }
 
     @GetMapping("/deleteTask")
-    private String deleteTask(@RequestParam("id") String id){
-        return service.deleteTask(id);
+    public void deleteTask(@RequestParam Long id){
+        taskService.deleteTask(id);
     }
+
     @GetMapping("/alltasks")
-    private List<Taskentity> getallTasks(){
-        return service.getallTasks();
+    public List<Task> getAllTasks(){
+        return taskService.getAllTasks();
     }
 
     @GetMapping("/getTask")
-    private Taskentity getTask(@RequestParam("id") String id){
-        return service.gettaskbyid(id);
+    public List<Task> getTask(@RequestParam String taskHolderName){
+        return taskService.getTasksByTaskHoldername(taskHolderName);
     }
 }
