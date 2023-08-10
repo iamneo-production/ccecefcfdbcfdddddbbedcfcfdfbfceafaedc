@@ -1,66 +1,58 @@
-package com.examly.springapp.model;
-
-import java.time.LocalDate;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tasks")
-public class Task{
+@Table(name="Task")
+public class Taskentity {
+
     @Id
-    @Column(name="taskid")
-    private Long taskid;
-
-    @Column(name="taskDate")
-    private LocalDate taskDate;
-
-    @Column(name="taskHolderName")
+    private String taskId;
     private String taskHolderName;
-
-    @Column(name="taskName")
+    private String taskDate;
     private String taskName;
-
-    @Column(name="taskStatus")
     private String taskStatus;
+   
 
-
-    public Long getTaskId(){
-        return taskid;
+    public String getTaskId() {
+        return taskId;
     }
-    public void setTaskId(long taskid){
-        this.taskid=taskid;
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
-
-    public LocalDate getTaskDate(){
-        return taskDate;
-    }
-    public void setTaskDate(LocalDate taskDate){
-        this.taskDate=taskDate;
-    }
-
-    public String getTaskHolderName(){
+    public String getTaskHolderName() {
         return taskHolderName;
     }
-    public void setTaskHolderName(String taskHolderName){
-        this.taskHolderName=taskHolderName;
+    public void setTaskHolderName(String taskHolderName) {
+        this.taskHolderName = taskHolderName;
     }
-    
-    public String getTaskName(){
+    public String getTaskDate() {
+        return taskDate;
+    }
+    public void setTaskDate(String taskDate) {
+        this.taskDate = taskDate;
+    }
+    public String getTaskName() {
         return taskName;
     }
-    public void setTaskName(String taskName){
-        this.taskName=taskName;
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
     }
-    
     public String getTaskStatus(){
         return taskStatus;
     }
     public void setTaskStatus(String taskStatus){
-        this.taskStatus=taskStatus;
+        this.taskStatus = taskStatus;
     }
 
-
+    public Taskentity(String taskId, String taskHolderName, String taskDate, String taskName, String taskStatus) {
+        this.taskId = taskId;
+        this.taskHolderName = taskHolderName;
+        this.taskDate = taskDate;
+        this.taskName = taskName;
+        this.taskStatus = taskStatus;
+    }
+  public Taskentity(){
+      
+  }  
 }
