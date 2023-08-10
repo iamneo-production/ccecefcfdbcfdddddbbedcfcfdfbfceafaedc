@@ -1,38 +1,56 @@
 package com.examly.springapp.service;
-import java.util.List;
 
+import java.util.List;
+import com.examly.springapp.repository.TaskRepository;
+import com.examly.springapp.entity.Taskentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
-import com.examly.springapp.model.Task;
-import com.examly.springapp.repository.TaskRepository;
 @Service
-public class TaskService{
+public class TaskService {
     @Autowired
-    private TaskRepository taskRepository;
+    private TaskRepository repository;
 
-    public Task saveTask(Task task){
-        return taskRepository.save(task);
+    public Taskentity saveTask(Taskentity taskentity){
+        repository.save(taskentity);
+        return taskentity;
     }
 
-    public Task changeStatus(Long taskid,String newStatus){
-        Task task=taskRepository.findById(taskid).orElse(null);
-        if(task!=null){
-            task.setTaskStatus(newStatus);
-            taskRepository.save(task);
+    public Taskentity updatetaskStatus(String taskId){
+        Optional<Taskentity> taskentity = repository.findByTaskId(taskId);
+        if(taskentity.isPresent()){
+            taskentity.get().setTaskStatus("Accepted");
+            repository.save(taskentity.get());
+            return taskentity.get();
         }
-        return task;
+        return null;
+        
     }
 
-    public void deleteTask(Long taskid){
-         taskRepository.deleteById(taskid);
+
+    public String deleteTask(String id){
+        Optional<Taskentity> taskentity = repository.findByTaskId(id);
+        if(taskentity.isPresent()){
+            repository.deleteByTaskId(id);
+            return"Task Deleted Successfully";
+        }
+        return "User not Found";
     }
 
-    public List<Task> getAllTasks(){
-        return taskRepository.findAll();
+
+    public List<Taskentity> getallTasks(){
+        return repository.findAll();
     }
 
-    public List<Task> getTasksByTaskHoldername(String taskHolderName){
-        return taskRepository.findByTaskHolderName(taskHolderName);
+    public Taskentity gettaskbyid(String id){
+        Optional<Taskentity> taskentity = repository.findByTaskId(id);
+        if(taskentity.isPresent()){
+            return taskentity.get();
+        }
+        return null;
     }
+
+    
+
 }
