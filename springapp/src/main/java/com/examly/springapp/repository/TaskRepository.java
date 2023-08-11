@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
  
 @Repository
-public interface TaskRepository  extends JpaRepository<TaskRepository,String>{
-Optional<TaskRepository> findByTaskId(String taskid);
+public interface TaskRepository  extends JpaRepository<Taskentity,String>{
+Optional<Taskentity> findByTaskId(String taskid);
 void deleteByTaskId(String taskid);
 
 }

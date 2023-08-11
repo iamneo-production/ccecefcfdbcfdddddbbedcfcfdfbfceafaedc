@@ -1,7 +1,6 @@
 package com.examly.springapp.controller;
 
 import com.examly.springapp.entity.Taskentity;
-import com.examly.springapp.repository.TaskRepository;
 import com.examly.springapp.service.TaskService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +19,14 @@ public class TaskController {
     private TaskService service;
     
     @PostMapping("/saveTask")
-    public TaskRepository saveTask(@RequestBody TaskRepository taskentity){
-        TaskRepository output = service.saveTask(taskentity);
+    public Taskentity saveTask(@RequestBody Taskentity taskentity){
+        Taskentity output = service.saveTask(taskentity);
         return output;
     }
 
 
     @GetMapping("/changeStatus")
-    private TaskRepository updatetaskStatus(@RequestParam("id") String id){
+    private Taskentity updatetaskStatus(@RequestParam("id") String id){
         return service.updatetaskStatus(id);
     }
 
@@ -36,12 +35,12 @@ public class TaskController {
         return service.deleteTask(id);
     }
     @GetMapping("/alltasks")
-    private List<TaskRepository> getallTasks(){
+    private List<Taskentity> getallTasks(){
         return service.getallTasks();
     }
 
     @GetMapping("/getTask")
-    private TaskRepository getTask(@RequestParam("id") String id){
+    private Taskentity getTask(@RequestParam("id") String id){
         return service.gettaskbyid(id);
     }
 
