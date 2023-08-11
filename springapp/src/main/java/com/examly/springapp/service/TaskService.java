@@ -20,7 +20,7 @@ public class TaskService {
     public TaskRepository updatetaskStatus(String taskId){
         Optional<TaskRepository> taskentity = repository.findByTaskId(taskId);
         if(taskentity.isPresent()){
-            taskentity.get().setTaskStatus("Accepted");
+            ((Taskentity) taskentity.get()).setTaskStatus("Accepted");
             repository.save(taskentity.get());
             return taskentity.get();
         }

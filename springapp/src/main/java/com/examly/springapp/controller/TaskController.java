@@ -1,6 +1,7 @@
 package com.examly.springapp.controller;
 
 import com.examly.springapp.entity.Taskentity;
+import com.examly.springapp.repository.TaskRepository;
 import com.examly.springapp.service.TaskService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
